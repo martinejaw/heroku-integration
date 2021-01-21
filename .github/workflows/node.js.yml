@@ -30,10 +30,14 @@ jobs:
       
     - name: Test
       id: hello
-      run: echo ::set-output name=test::$(npm test)
+      run: |
+        echo ::set-output name=test::$(npm test)
+        echo ::set-output name=title::"[Test] Add report file $(date +%d-%m-%Y)"
       
     - name: Get the output time
-      run: echo "The time was ${{ steps.hello.outputs.test }}"
+      run: |
+        echo "The time was ${{ steps.hello.outputs.title }}"
+        echo "The time was ${{ steps.hello.outputs.test }}"
 
     - name: Run this step when test success
       if: ${{steps.hello.conclusion == 'success' }}
