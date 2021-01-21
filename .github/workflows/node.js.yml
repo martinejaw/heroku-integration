@@ -28,10 +28,11 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
       
-    - id: hello
-      run: echo "::set-output name=test::$(npm test)"
+    - name: Test
+      id: hello
+      run: echo "::set-output name=test::{HOLA}"
       
     - name: Get the output time
-      run: echo "The time was ${{ steps.hello.outputs.time }}"
+      run: echo "The time was ${{ steps.hello.outputs.test }}"
 
 
