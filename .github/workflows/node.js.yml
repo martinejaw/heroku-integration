@@ -31,7 +31,7 @@ jobs:
     - name: Test
       id: test
       run: |
-        echo ::set-output name=date::"[Test] $(date +%d-%m-%Y)"
+        echo ::set-output name=date::"$(date +%d-%m-%Y)"
         echo ::set-output name=test::$(npm test)
       
     - name: Get the output time
@@ -44,7 +44,7 @@ jobs:
 
     
     - name: Tests ✅
-      if: ${{ success() }}
+      if: success()
       uses: appleboy/telegram-action@master
       with:
        to: ${{ secrets.TELEGRAM_TO }}
@@ -52,9 +52,12 @@ jobs:
        message: Tests ✅ --- ${{ steps.test.outputs.date }}
 
     - name: Tests 🚨
-      if: ${{ failure() }}
-      run: |
-        echo "${{ steps.hello.outputs.title }}"
+      if: failure() 
+      uses: appleboy/telegram-action@master
+      with:
+       to: ${{ secrets.TELEGRAM_TO }}
+       token: ${{ secrets.TELEGRAM_TOKEN }}
+       message: Tests ✅ --- ${{ steps.test.outputs.date }}}}"
       
 
 
