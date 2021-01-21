@@ -28,13 +28,10 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
       
-    - id: tests
+    - id: hello
       run: echo "::set-output name=test::$(npm test)"
       
+    - name: Get the output time
+      run: echo "The time was ${{ steps.hello.outputs.time }}"
 
-    - name: Telegram
-      uses: appleboy/telegram-action@master
-      with:
-       to: ${{ secrets.TELEGRAM_TO }}
-       token: ${{ secrets.TELEGRAM_TOKEN }}
-       message: ${{ steps.tests.outputs.test }}
+
