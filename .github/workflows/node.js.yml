@@ -32,7 +32,7 @@ jobs:
       id: test
       run: |
         echo ::set-output name=date::"$(date +%d-%m-%Y)"
-        echo ::set-output name=test::$(npm test)
+        npm test
       
     - name: Get the output time
       run: |
@@ -44,7 +44,7 @@ jobs:
 
     
     - name: Tests ✅
-      if: ${{steps.test.conclusion == 'success' }}
+      if: success()
       uses: appleboy/telegram-action@master
       with:
        to: ${{ secrets.TELEGRAM_TO }}
