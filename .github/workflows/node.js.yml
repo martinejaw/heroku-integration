@@ -29,7 +29,7 @@ jobs:
     - run: npm run build --if-present
       
     - name: Test
-      run: echo "::set-output name={testresult}::$(npm test)"
+      run: echo "##[set-output name=testresult;]$(npm test)"
       id: run_tests
 
     - name: Telegram
