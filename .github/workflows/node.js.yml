@@ -28,11 +28,11 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
-      id: hello
+      id: run_tests
 
     - name: Telegram
       uses: appleboy/telegram-action@master
       with:
        to: ${{ secrets.TELEGRAM_TO }}
        token: ${{ secrets.TELEGRAM_TOKEN }}
-       message: The ${{ github.event_name }} event triggered final step. ${{ steps.hello.outputs.time }}"
+       message: ${{ github.event_name }}-- ${{join(steps.run_tests.outputs.*, '\n')}}
