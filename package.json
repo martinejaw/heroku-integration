@@ -1,13 +1,16 @@
 {
   "name": "apirest",
   "version": "1.0.0",
+  "author": "Martincho",
   "description": "Una api rest para fatima",
   "main": "server.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage --ci --colors" ,
     "start": "node server.js"
   },
-  "author": "Martincho",
+  "jest": {
+    "verbose": true
+  },
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
