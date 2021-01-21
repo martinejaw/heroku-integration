@@ -31,16 +31,30 @@ jobs:
     - name: Test
       id: hello
       run: |
+        echo ::set-output name=title::"[Test] $(date +%d-%m-%Y)"
         echo ::set-output name=test::$(npm test)
-        echo ::set-output name=title::"[Test] Add report file $(date +%d-%m-%Y)"
       
     - name: Get the output time
       run: |
-        echo "The time was ${{ steps.hello.outputs.title }}"
         echo "The time was ${{ steps.hello.outputs.test }}"
 
     - name: Run this step when test success
       if: ${{steps.hello.conclusion == 'success' }}
       run: echo "Run this step when test success"
+
+    
+    - name: Tests ✅
+      if: ${{ success() }}
+      uses: appleboy/telegram-action@master
+      with:
+       to: ${{ secrets.TELEGRAM_TO }}
+       token: ${{ secrets.TELEGRAM_TOKEN }}
+       message: Tests ✅ --- $(date +%d-%m-%Y)
+
+    - name: Tests 🚨
+      if: ${{ failure() }}
+      run: |
+        echo "${{ steps.hello.outputs.title }}"
+      
 
 
