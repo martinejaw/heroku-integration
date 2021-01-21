@@ -28,13 +28,13 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
       
-    - name: Test
-      run: echo "##[set-output name=testresult;]$(npm test)"
-      id: run_tests
+    - id: tests
+      run: echo "::set-output name=test::$(npm test)"
+      
 
     - name: Telegram
       uses: appleboy/telegram-action@master
       with:
        to: ${{ secrets.TELEGRAM_TO }}
        token: ${{ secrets.TELEGRAM_TOKEN }}
-       message: ${{ steps.run_tests.outputs.testresult }}
+       message: ${{ steps.tests.outputs.test }}
