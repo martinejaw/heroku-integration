@@ -14,6 +14,10 @@ app.get('/ejemplo', (req, res) => {
     res.send({ example: 'Example' })
 })
 
+app.get('/ejemplo2', (req, res) => {
+    res.send({ example: 'Example' })
+})
+
 app.get('/recetas', (req, res) => {
     res.send('Ejemplo')
 })
