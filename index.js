@@ -1,17 +1,18 @@
 
 const express = require('express')
 
-
 const app = express()
-app.use(express.json())
-
 const port = process.env.PORT || 3000
 
+app.use(express.json())
 
 app.get('/', (req, res) => {
     res.send({ hola: 'Hello World!' })
 })
 
+app.get('/ejemplo', (req, res) => {
+    res.send({ example: 'Example' })
+})
 
 app.get('/recetas', (req, res) => {
     res.send('Ejemplo')
